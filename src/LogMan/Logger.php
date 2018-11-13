@@ -26,10 +26,12 @@ class Logger
     /**
      * @param LogItem $log
      */
-    public function log(LogItem $log)
+    public function log(LogInterface $log)
     {
+        $array = $log->toArray();
+
         $this->client->post($this->endpoint, [
-            RequestOptions::JSON => (string) $log
+            RequestOptions::JSON => $array,
         ]);
     }
 }
